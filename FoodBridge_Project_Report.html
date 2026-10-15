@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodBridge — Engineering Project Report & Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      themeVariables: {
+        fontFamily: 'Plus Jakarta Sans, sans-serif',
+        primaryColor: '#E8F5E9',
+        primaryBorderColor: '#1B4D3E',
+        primaryTextColor: '#1B4D3E',
+        lineColor: '#1B4D3E',
+        secondaryColor: '#FBE9E0',
+        tertiaryColor: '#E0F2FE'
+      }
+    });
+  </script>
+  <style>
+    :root {
+      --primary: #1B4D3E;
+      --primary-light: #E8F5E9;
+      --accent: #E25822;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --bg: #F8FAF8;
+      --card-bg: #FFFFFF;
+      --border: #E2E8F0;
+      --code-bg: #0F172A;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 56px 48px;
+      border-radius: 28px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border);
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #0F172A;
+      font-weight: 800;
+    }
+    .header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 28px;
+      margin-bottom: 36px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 34px;
+      letter-spacing: -0.6px;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    h2 {
+      font-size: 24px;
+      margin: 40px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.3px;
+    }
+    h3 {
+      font-size: 18px;
+      margin: 24px 0 10px;
+      color: #334155;
+    }
+    p {
+      margin-bottom: 16px;
+      color: #334155;
+      font-size: 15px;
+    }
+    ul, ol {
+      margin: 0 0 20px 24px;
+      color: #334155;
+      font-size: 15px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 14px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+    }
+    th {
+      background: #F1F5F9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      color: #1E293B;
+      border-bottom: 2px solid var(--border);
+    }
+    td {
+      border-bottom: 1px solid var(--border);
+    }
+    tr:nth-child(even) td {
+      background: #FAFAFA;
+    }
+    .diagram-container {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .feature-card {
+      background: #F8FAF8;
+      border: 1px solid rgba(27, 77, 62, 0.15);
+      border-radius: 18px;
+      padding: 20px;
+    }
+    .feature-card.ngo {
+      background: #FDF8F5;
+      border-color: rgba(163, 72, 40, 0.15);
+    }
+    .feature-card.rider {
+      background: #F4F8FC;
+      border-color: rgba(30, 58, 138, 0.15);
+    }
+    .feature-card h4 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: 13.5px;
+      color: #64748B;
+      margin: 0;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .tag-donor { background: #E8F5E9; color: #1B4D3E; }
+    .tag-ngo { background: #FBE9E0; color: #A34828; }
+    .tag-rider { background: #E0F2FE; color: #1E3A8A; }
+    .footer {
+      margin-top: 50px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .container { box-shadow: none; border: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <span class="badge">Production Project Report</span>
+      <h1>FoodBridge — System Engineering Report</h1>
+      <div class="subtitle">Community Surplus Food Rescue & Hyper-Local Hunger Relief Network</div>
+    </div>
+
+    <h2>1. Executive Summary & Problem Scope</h2>
+    <p>
+      <strong>FoodBridge</strong> is a multi-role, real-time cross-platform mobile system engineered using <strong>Flutter (Dart 3.x)</strong>, <strong>Riverpod</strong>, and <strong>Supabase (PostgreSQL with Realtime WebSockets)</strong>. The system provides an automated logistics pipeline resolving the urban food wastage paradox by connecting commercial kitchens, food relief shelters, and crowdsourced couriers.
+    </p>
+
+    <div class="card-grid">
+      <div class="feature-card">
+        <span class="tag tag-donor">Donor Kitchens</span>
+        <h4>Commercial Donors</h4>
+        <p>Hotels, restaurants, and caterers broadcast surplus meals with dietary tags and expiry windows in under 45 seconds.</p>
+      </div>
+      <div class="feature-card ngo">
+        <span class="tag tag-ngo">Shelters & NGOs</span>
+        <h4>Distribution Shelters</h4>
+        <p>Verified orphanages and community pantries discover nearby donations on a live feed and claim them with 1 tap.</p>
+      </div>
+      <div class="feature-card rider">
+        <span class="tag tag-rider">Volunteer Couriers</span>
+        <h4>Mobility Fleet</h4>
+        <p>Crowdsourced riders receive dispatch job cards with interactive turn-by-turn map navigation to deliver hot meals before spoilage.</p>
+      </div>
+    </div>
+
+    <h2>2. Technical Architecture & Component Stack</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>System Layer</th>
+          <th>Technology Selected</th>
+          <th>Architectural Rationale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mobile Client Framework</strong></td>
+          <td>Flutter 3.29+ / Dart 3.x (Impeller Backend)</td>
+          <td>Native 60fps rendering, cross-platform code parity, reactive component model.</td>
+        </tr>
+        <tr>
+          <td><strong>State Management</strong></td>
+          <td>Flutter Riverpod 2.4.9</td>
+          <td>Uni-directional reactive state, clean dependency injection, testability without BuildContext coupling.</td>
+        </tr>
+        <tr>
+          <td><strong>Navigation Engine</strong></td>
+          <td>GoRouter 12.1.1</td>
+          <td>Declarative URL routing, smooth custom transitions, and guarded route redirection.</td>
+        </tr>
+        <tr>
+          <td><strong>Database & Real-Time</strong></td>
+          <td>Supabase (PostgreSQL 15 + WebSocket Channels)</td>
+          <td>Row-level filtering, sub-second broadcast of donation and job state transitions.</td>
+        </tr>
+        <tr>
+          <td><strong>Mapping & Geolocation</strong></td>
+          <td>flutter_map 6.1.0, latlong2, geolocator 11.0.0</td>
+          <td>Hardware GPS coordinate tracking, OpenStreetMap vector rendering, route polyline overlay.</td>
+        </tr>
+        <tr>
+          <td><strong>Local Storage</strong></td>
+          <td>shared_preferences 2.2.2</td>
+          <td>Persistent session authentication, role switching state, offline metadata.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>3. High-Level Architecture Diagram</h2>
+    <div class="diagram-container">
+      <div class="mermaid">
+graph TD
+    subgraph Client Application [Flutter Multi-Role Client Application]
+        UI[Material You UI Layer]
+        Router[GoRouter Navigation Engine]
+        State[Riverpod State Layer - Notifiers & Providers]
+        LocalStore[(SharedPreferences Local Session)]
+    end
+
+    subgraph Hardware Layer [Native Device APIs]
+        GPS[GPS Geolocator]
+        Cam[Camera / Gallery ImagePicker]
+        Phone[Native Telephony / Dialer]
+        MapEngine[FlutterMap Leaflet Engine]
+    end
+
+    subgraph Cloud Infrastructure [Supabase BaaS / PostgreSQL]
+        Auth[Supabase Auth & OTP Gateway]
+        DB[(PostgreSQL Relational DB)]
+        Realtime[WebSocket Realtime Engine]
+    end
+
+    UI --> Router
+    UI --> State
+    State --> LocalStore
+    State --> GPS
+    State --> Cam
+    State --> Phone
+    UI --> MapEngine
+
+    State --> Auth
+    State --> DB
+    Realtime -.->|Live Push Updates| State
+    DB --> Realtime
+      </div>
+    </div>
+
+    <h2>4. End-to-End Food Rescue Flow Diagram</h2>
+    <div class="diagram-container">
+      <div class="mermaid">
+sequenceDiagram
+    autonumber
+    actor Donor as Food Donor (Kitchen)
+    actor NGO as NGO Shelter (Beneficiary)
+    actor Courier as Volunteer Courier (Rider)
+    participant App as FoodBridge App Engine
+    participant Cloud as Supabase Realtime DB
+
+    Donor->>App: Fills 3-Step Wizard (Servings, Expiry, Veg/Non-Veg)
+    Donor->>App: Taps "Broadcast Donation"
+    App->>Cloud: INSERT INTO donations (status: 'pending')
+    Cloud-->>App: Broadcasts WebSocket event: new_donation
+
+    Cloud->>App: Real-time update arrives on NGO Live Feed
+    NGO->>App: Inspects Food details & distance
+    NGO->>App: Taps "Claim Surplus"
+    App->>Cloud: UPDATE donations SET status = 'matched', matched_ngo = 'Shelter Name'
+    Cloud-->>App: Broadcasts WebSocket event: donation_matched
+
+    Cloud->>App: Courier Home Screen renders active Job Card
+    Courier->>App: Accepts Delivery Assignment
+    App->>Cloud: UPDATE donations SET status = 'inTransit', rider_id = 'R-101'
+    Courier->>App: Launches Active Delivery Screen (GPS + Route Polyline)
+    Courier->>Donor: Calls Donor via in-app dialer & picks up food
+    Courier->>App: Confirms Pickup with 4-Digit Security Code
+
+    Courier->>NGO: Navigates to Shelter & hands over meals
+    NGO->>Courier: Confirms intake
+    Courier->>App: Taps "Complete Delivery"
+    App->>Cloud: UPDATE donations SET status = 'delivered'
+    Cloud-->>Donor: Live Tracking Screen updates: "Delivered Successfully!"
+    Cloud-->>NGO: Increments total meals received metric
+      </div>
+    </div>
+
+    <h2>5. Authentication & Session Architecture</h2>
+    <p>
+      The authentication subsystem is implemented in <code>login_screen.dart</code> and managed via <code>userSessionProvider</code>. It enforces session persistence across restarts with the following flow:
+    </p>
+
+    <div class="diagram-container">
+      <div class="mermaid">
+flowchart TD
+    Start([App Launch]) --> Splash[Splash Screen]
+    Splash --> CheckAuth{Is User Logged In?}
+    
+    CheckAuth -- Yes --> DirectRoute[Route to Active Role Dashboard]
+    CheckAuth -- No --> Login[Sign In Screen]
+    
+    Login --> SelectRole[Select Role: Donor / NGO / Courier]
+    SelectRole --> InputData[Enter Name & 10-Digit Mobile Number]
+    InputData --> RequestOTP[Request 4-Digit Verification Code]
+    
+    RequestOTP --> OTPState[Enter OTP / 1-Tap Auto-Fill]
+    OTPState --> Verify{Validate 4 Digits}
+    
+    Verify -- Success --> SaveSession[Save User Profile to SharedPreferences]
+    SaveSession --> RouteHome[Navigate to Role Home Screen]
+    Verify -- Incorrect --> Retry[Show Error Toast & Retry]
+    
+    Login -.->|Optional Bypass| Guest[Browse as Guest Hub]
+    Guest --> SelectGuestRole[Explore Any Stakeholder Hub]
+      </div>
+    </div>
+
+    <h2>6. Relational Database Schema</h2>
+    <div class="diagram-container">
+      <div class="mermaid">
+erDiagram
+    PROFILES ||--o{ DONATIONS : creates
+    PROFILES ||--o{ NGO_REQUESTS : posts
+    PROFILES ||--o{ DONATIONS : couriers
+    DONATIONS }|--|| NGO_REQUESTS : fulfills
+
+    PROFILES {
+        uuid id PK
+        string full_name
+        string phone_number
+        string role "donor | ngo | rider"
+        string organization_name
+        string verified_badge
+        timestamp created_at
+    }
+
+    DONATIONS {
+        uuid id PK
+        uuid donor_id FK
+        string food_name
+        string category "Cooked Meals | Bakery | Produce"
+        string quantity
+        string unit "kg | packets | trays"
+        int servings
+        string condition "Freshly Prepared | Chilled"
+        boolean is_urgent
+        string status "pending | matched | inTransit | delivered"
+        string matched_ngo
+        string rider_id
+        timestamp posted_at
+        timestamp expires_at
+    }
+
+    NGO_REQUESTS {
+        uuid id PK
+        uuid ngo_id FK
+        string ngo_name
+        string category
+        int people_count
+        string required_by
+        string urgency "Urgent | Normal"
+        string status "open | fulfilled | closed"
+        float distance_km
+        timestamp created_at
+    }
+      </div>
+    </div>
+
+    <h2>7. Quality Assurance & Release Artifacts</h2>
+    <ul>
+      <li><strong>Codebase Diagnostics</strong>: Ran <code>flutter analyze</code> with <strong>0 compilation errors</strong>.</li>
+      <li><strong>Emulator Testing</strong>: Verified complete interactive sign-in, OTP auto-fill, dashboard routing, and dynamic profile binding on Android Virtual Device (<code>emulator-5554</code>).</li>
+      <li><strong>Standalone Production Release APK</strong>: Compiled to <code>C:\Users\prakhyat\Desktop\FoodBridge.apk</code> (59.4 MB) for installation on real Android devices.</li>
+    </ul>
+
+    <div class="footer">
+      FoodBridge · Community Hunger Relief Network · Engineering Documentation 2026
+    </div>
+  </div>
+
+</body>
+</html>

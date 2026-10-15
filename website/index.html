@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FoodBridge — Justice Begins Where Inequality Ends | Global Aid Network</title>
+  <meta name="description" content="FoodBridge Global Aid Network — Rescuing surplus food, empowering communities, and feeding families with dignity.">
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+
+  <!-- Google Fonts: DM Serif Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Supabase JS Client for Realtime Cloud Sync -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Leaflet CSS & JS for OpenStreetMap Interactive Geospatial Display -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Background Watermarks & Map Pattern -->
+  <div class="bg-map-pattern"></div>
+  <div class="bg-continent-silhouette"></div>
+  <div class="bg-continent-right"></div>
+
+  <!-- Top Header / Navigation -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="#hero" class="brand-wrapper">
+        <img src="assets/logo.jpg" alt="FoodBridge Logo" class="brand-logo-img">
+        <div class="brand-title">Food<span>Bridge</span></div>
+      </a>
+
+      <nav class="main-nav" aria-label="Main Menu">
+        <ul class="nav-menu">
+          <li><a href="#hero" class="nav-link-item active">HOME</a></li>
+          <li><a href="#live-feed" class="nav-link-item"><span class="live-dot-nav"></span> LIVE FEED</a></li>
+          <li><a href="#live-map" class="nav-link-item">FLEET MAP</a></li>
+          <li><a href="#programs" class="nav-link-item">PROGRAMS</a></li>
+          <li><a href="#about" class="nav-link-item">ABOUT</a></li>
+          <li><a href="#fundraiser" class="nav-link-item">CAMPAIGNS</a></li>
+          <li><a href="javascript:void(0)" onclick="openAppSimulatorModal()" class="nav-link-item">MOBILE APP</a></li>
+          <li><a href="#footer" class="nav-link-item">CONTACT US</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-right">
+        <div class="header-phone">
+          <span class="phone-icon-pill">📞</span>
+          <span>(84) 1800 700 999</span>
+        </div>
+
+        <div class="header-icons">
+          <span style="cursor: pointer;" title="Search">🔍</span>
+          <span style="cursor: pointer;" title="User Portal" onclick="openAppSimulatorModal()">👤</span>
+        </div>
+
+        <button class="btn-pill-amber" onclick="openPledgeDonationModal()">
+          DONATE NOW
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Exact Gainlove Staggered Diagonal Capsules Cluster) -->
+  <section class="hero-gainlove" id="hero">
+    <!-- Section-relative decorative dots -->
+    <div class="decor-dot dot-amber-hero-left"></div>
+    <div class="decor-dot dot-green-hero-top"></div>
+    <div class="decor-dot dot-blue-hero-mid"></div>
+    <div class="decor-dot dot-amber-hero-right"></div>
+    <div class="decor-dot dot-cyan-hero-bot"></div>
+
+    <div class="container">
+      <div class="hero-gainlove-grid">
+        <!-- Left Text Column -->
+        <div class="hero-text-col">
+          <div class="hero-badge-row">
+            <span class="hero-amber-dot"></span>
+            <span class="hero-badge-text">GLOBAL RESCUE ALLIANCE</span>
+          </div>
+
+          <h1 class="hero-headline-serif">
+            Justice<br>
+            begins where<br>
+            inequality<br>
+            ends
+          </h1>
+
+          <p class="hero-subparagraph">
+            We're building a world where everyone has the power to shape their lives. Through intelligent surplus food routing and volunteer logistics, we turn excess into dignity and hope.
+          </p>
+
+          <div class="hero-btn-row">
+            <button class="btn-pill-dark" onclick="openPledgeDonationModal()">
+              DONATE NOW
+            </button>
+            <button class="btn-pill-teal" onclick="openAppSimulatorModal()">
+              📱 LAUNCH APP DEMO
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Slanted Capsules Display -->
+        <div class="hero-capsule-display">
+          <div class="diagonal-cluster-container">
+            <!-- Capsule 1 -->
+            <div class="capsule-column capsule-col-1">
+              <img src="assets/program_1.jpg" alt="Food Relief Volunteer" class="capsule-inner-img">
+            </div>
+
+            <!-- Capsule 2 (Taller center focal capsule) -->
+            <div class="capsule-column capsule-col-2">
+              <img src="assets/portrait_child.jpg" alt="Smiling Child Portrait" class="capsule-inner-img">
+            </div>
+
+            <!-- Capsule 3 -->
+            <div class="capsule-column capsule-col-3">
+              <img src="assets/hero_photo.jpg" alt="Community Meal Sharing" class="capsule-inner-img">
+            </div>
+
+            <!-- Capsule 4 -->
+            <div class="capsule-column capsule-col-4">
+              <img src="assets/program_3.jpg" alt="Youth Volunteers" class="capsule-inner-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: "Our Programs" (3-Card Layout matching Reference) -->
+  <section class="programs-section" id="programs">
+    <div class="container">
+      <div class="section-title-center">
+        <h2 class="section-heading-serif">Our Programs</h2>
+        <p class="section-subtext">
+          As through resources that you actually can grow you get rid of everything bad, do not expose the vulnerable to get hurt.
+        </p>
+      </div>
+
+      <div class="programs-grid-3">
+        <!-- Card 1 -->
+        <div class="program-card">
+          <div class="program-img-box">
+            <img src="assets/program_1.jpg" alt="Anti-Poverty & Surplus Relief" class="program-img">
+          </div>
+          <div class="program-card-body">
+            <div>
+              <h3 class="program-card-title">Anti-Poverty Programs & Services</h3>
+              <p class="program-card-desc">
+                Programs and services designed to relieve the effects of and address the root causes of poverty through hot meals and grocery access.
+              </p>
+            </div>
+            <button class="program-card-btn" onclick="openProgramDetails('anti-poverty')">
+              LEARN MORE
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="program-card">
+          <div class="program-img-box">
+            <img src="assets/program_2.jpg" alt="Family & Community Programs" class="program-img">
+          </div>
+          <div class="program-card-body">
+            <div>
+              <h3 class="program-card-title">Family & Community Programs</h3>
+              <p class="program-card-desc">
+                Programs designed to educate and engage all ages of the community, the entire family across children and elders alike.
+              </p>
+            </div>
+            <button class="program-card-btn" onclick="openProgramDetails('family')">
+              LEARN MORE
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="program-card">
+          <div class="program-img-box">
+            <img src="assets/program_3.jpg" alt="Teen Programs & Youth" class="program-img">
+          </div>
+          <div class="program-card-body">
+            <div>
+              <h3 class="program-card-title">Teen & Volunteer Programs</h3>
+              <p class="program-card-desc">
+                Comes with our resource center's food relief test center and take advantage of our volunteer youth's daily engagement.
+              </p>
+            </div>
+            <button class="program-card-btn" onclick="openProgramDetails('teen')">
+              LEARN MORE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Live Supabase Rescue Stream (Connected to Mobile App) -->
+  <section class="live-feed-section" id="live-feed">
+    <div class="container">
+      <div class="live-feed-header-bar">
+        <div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <span class="section-label-amber">REALTIME RESCUE DISPATCH</span>
+            <div class="supabase-badge-indicator" id="liveSyncStatus">
+              <span class="supabase-pulse"></span>
+              <span id="liveSyncStatusText">Supabase Cloud Connected</span>
+            </div>
+          </div>
+          <h2 class="section-heading-serif">Live Surplus Food Rescues</h2>
+          <p class="section-subtext" style="margin-bottom: 0;">
+            Real-time feed synced directly with our volunteer courier fleet and partner community kitchens.
+          </p>
+        </div>
+
+        <div>
+          <button class="btn-pill-amber" onclick="openPledgeDonationModal()">
+            + PLEDGE NEW SURPLUS
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-pills-row">
+        <button class="filter-pill-btn active" onclick="filterRescueFeed('all', this)">All Rescues (<span id="countAll">0</span>)</button>
+        <button class="filter-pill-btn" onclick="filterRescueFeed('pending', this)">Pending Match (<span id="countPending">0</span>)</button>
+        <button class="filter-pill-btn" onclick="filterRescueFeed('inTransit', this)">In Transit (<span id="countTransit">0</span>)</button>
+        <button class="filter-pill-btn" onclick="filterRescueFeed('delivered', this)">Delivered (<span id="countDelivered">0</span>)</button>
+      </div>
+
+      <!-- Live Cards Grid -->
+      <div class="rescue-grid" id="rescueFeedGrid">
+        <div style="grid-column: 1 / -1; text-align: center; padding: 48px 0; color: var(--text-muted);">
+          <div style="font-size: 2rem; margin-bottom: 12px;">⏳</div>
+          <div>Loading live rescue data from Supabase Cloud...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Live Geospatial Rescue & Fleet Map -->
+  <section class="live-map-section" id="live-map">
+    <div class="container">
+      <div class="live-map-header-bar">
+        <div>
+          <span class="section-label-amber">GEOSPATIAL TELEMETRY</span>
+          <h2 class="section-heading-serif">Live Fleet & Community Rescue Map</h2>
+          <p class="section-subtext" style="margin-bottom: 0;">
+            Real-time GPS routing connecting donors, volunteer riders, and community shelters across Mumbai.
+          </p>
+        </div>
+        <div class="map-controls-row">
+          <div class="map-filter-group">
+            <button class="map-chip-btn active" onclick="filterMapNodes('all', this)">All Nodes (6)</button>
+            <button class="map-chip-btn" onclick="filterMapNodes('donor', this)">🍲 Donors</button>
+            <button class="map-chip-btn" onclick="filterMapNodes('ngo', this)">🏠 Shelters</button>
+            <button class="map-chip-btn" onclick="filterMapNodes('rider', this)">🛵 Riders</button>
+          </div>
+          <button class="btn-pill-amber" onclick="centerMapOnActiveMission()">
+            🎯 RECENTER ON RIDER R-201
+          </button>
+        </div>
+      </div>
+
+      <!-- Map Wrapper with Floating Live Telemetry HUD -->
+      <div class="map-wrapper-card">
+        <div id="leafletMap" class="leaflet-map-canvas"></div>
+
+        <!-- Floating Live Telemetry HUD -->
+        <div class="map-telemetry-hud">
+          <div class="hud-header">
+            <span class="hud-live-dot"></span>
+            <b>MISSION DISPATCH #FB-2026</b>
+          </div>
+          <div class="hud-body">
+            <div class="hud-stat-item">
+              <span class="hud-label">Rider En Route:</span>
+              <span class="hud-val">Vikram S. (R-201)</span>
+            </div>
+            <div class="hud-stat-item">
+              <span class="hud-label">Transit Route:</span>
+              <span class="hud-val">Harvest Kitchen ➔ Helping Hands</span>
+            </div>
+            <div class="hud-stat-item">
+              <span class="hud-label">ETA to Dropoff:</span>
+              <span class="hud-val" style="color: #10B981; font-weight: 800;">~12 Mins (2.4 km)</span>
+            </div>
+            <div class="hud-stat-item">
+              <span class="hud-label">Surplus Batch:</span>
+              <span class="hud-val">50 Portions Basmati Rice & Curry</span>
+            </div>
+          </div>
+          <div class="hud-footer">
+            <button class="btn-hud-track" onclick="openAppSimulatorModal()">Open Mobile Telemetry 📱</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: "Welcome to the FoodBridge Global aid network" -->
+  <section class="welcome-aid-section" id="about">
+    <div class="container">
+      <div class="welcome-aid-box">
+        <span class="section-label-amber">ABOUT US</span>
+        <h2 class="section-heading-serif">Welcome to the FoodBridge Global aid network</h2>
+        <p>
+          The FoodBridge Global aid network establishes a thriving and connected community, one in which all of the members have dependable access to resources that enrich and empower lives. A community where all of its members feel they can belong, one in which everyone has a chance to both contribute and receive. A community where everyone can feel fulfilled by their involvement.
+        </p>
+
+        <div class="welcome-btns-row">
+          <button class="btn-pill-teal" onclick="openAppSimulatorModal()">
+            GET INVOLVED
+          </button>
+          <button class="btn-pill-dark" onclick="openPledgeDonationModal()">
+            DONATE NOW
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: Fundraiser Split with Overlapping Circular Collages -->
+  <section class="fundraiser-split-section" id="fundraiser">
+    <div class="container">
+      <div class="fundraiser-grid">
+        <!-- Left Overlapping Circular Photos -->
+        <div class="circle-collage-container">
+          <div class="circle-bg-ring"></div>
+          
+          <div class="circle-img-large">
+            <img src="assets/portrait_child.jpg" alt="Hopeful Community Child">
+          </div>
+
+          <div class="circle-img-medium">
+            <img src="assets/hero_photo.jpg" alt="Community Meal Table">
+          </div>
+
+          <div class="circle-img-small">
+            <img src="assets/program_1.jpg" alt="Meal Volunteer Support">
+          </div>
+        </div>
+
+        <!-- Right Fundraiser Text -->
+        <div class="fundraiser-content">
+          <span class="section-label-amber">ANNUAL CAMPAIGN</span>
+          <h2 class="fundraiser-title-serif">2026 fundraiser champions for social justice</h2>
+          <div class="fundraiser-lead">Help raise $50,000 & 100,000 warm meals for the community of Stanwood Care.</div>
+          
+          <p class="fundraiser-body">
+            The FoodBridge Global aid network is hosting an event to educate our community about the services we provide and our foundational Family Support Principles. We will highlight real stories from community members impacted by the Global aid network. We will also have a keynote speaker discussing social and racial equity and its impact on individuals and community outcomes.
+          </p>
+
+          <div class="fundraiser-meta-bar">
+            <div>
+              <div class="count">12,840+</div>
+              <div class="text">Meals Distributed This Month</div>
+            </div>
+            <div style="width: 1px; height: 36px; background: var(--border-light); margin: 0 12px;"></div>
+            <div>
+              <div class="count" style="color: var(--color-accent-amber);">48</div>
+              <div class="text">Shelters & Orphanages Partnered</div>
+            </div>
+          </div>
+
+          <a href="javascript:void(0)" onclick="openPledgeDonationModal()" class="fundraiser-link-action">
+            <span>Learn More and Join the Movement</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section: "Give a future full of choices" + Category Tabs -->
+  <section class="pillars-category-section" id="choices">
+    <div class="container">
+      <div class="section-title-center">
+        <span class="section-label-amber">OUR PILLARS</span>
+        <h2 class="section-heading-serif">Give a future full of choices</h2>
+        <p class="section-subtext">Every child and every family deserves a healthy start with wholesome nutrition.</p>
+      </div>
+
+      <div class="category-icon-nav">
+        <div class="cat-nav-item active" onclick="setCategoryPillar('health', this)">
+          <div class="cat-nav-icon">🍲</div>
+          <span class="cat-nav-label">Nutrition</span>
+        </div>
+        <div class="cat-nav-item" onclick="setCategoryPillar('education', this)">
+          <div class="cat-nav-icon">📚</div>
+          <span class="cat-nav-label">Education</span>
+        </div>
+        <div class="cat-nav-item" onclick="setCategoryPillar('protection', this)">
+          <div class="cat-nav-icon">🛡️</div>
+          <span class="cat-nav-label">Protection</span>
+        </div>
+        <div class="cat-nav-item" onclick="setCategoryPillar('emergency', this)">
+          <div class="cat-nav-icon">🚨</div>
+          <span class="cat-nav-label">Emergency Aid</span>
+        </div>
+      </div>
+
+      <!-- App Connect Banner (Connecting the Flutter Mobile App) -->
+      <div class="app-connect-bar">
+        <div class="app-connect-text">
+          <h3>Connected to the FoodBridge Mobile App</h3>
+          <p>
+            Experience our production Flutter app featuring live Riverpod state synchronization, OpenStreetMap routing, and 4-digit OTP delivery handoffs.
+          </p>
+        </div>
+        <div class="app-connect-actions">
+          <button class="btn-pill-amber" onclick="openAppSimulatorModal()">
+            📱 TEST APP SIMULATOR
+          </button>
+          <button class="btn-pill-teal" onclick="alert('📲 To compile and test the Android APK:\nRun `powershell -ExecutionPolicy Bypass -File .\\build_apk.ps1` in the terminal to generate FoodBridge.apk on your Desktop!')">
+            ⬇️ DOWNLOAD APK
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer (Clean Gainlove Style) -->
+  <footer class="gainlove-footer" id="footer">
+    <div class="container">
+      <div class="footer-top-row">
+        <div>
+          <div class="brand-wrapper" style="margin-bottom: 16px; margin-right: 0;">
+            <img src="assets/logo.jpg" alt="FoodBridge" class="brand-logo-img">
+            <div class="footer-brand-title">Food<span>Bridge</span></div>
+          </div>
+          <p style="color: var(--text-body); max-width: 320px; font-size: 0.9rem; line-height: 1.7;">
+            FoodBridge Global Aid Network is committed to wiping out food insecurity and establishing dignified meal access for every community member.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">QUICK LINKS</div>
+          <ul class="footer-link-list">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#programs">Our Programs</a></li>
+            <li><a href="#about">About Gainlove Network</a></li>
+            <li><a href="#fundraiser">Campaigns</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">PROGRAMS</div>
+          <ul class="footer-link-list">
+            <li><a href="#programs">Anti-Poverty Services</a></li>
+            <li><a href="#programs">Family & Community</a></li>
+            <li><a href="#programs">Teen Volunteer Fleet</a></li>
+            <li><a href="javascript:void(0)" onclick="openAppSimulatorModal()">Rider Dispatch Console</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">GET IN TOUCH</div>
+          <ul class="footer-link-list">
+            <li><span>📞 (84) 1800 700 999</span></li>
+            <li><span>✉️ aid@foodbridge.org</span></li>
+            <li><span>📍 Stanwood Care Center, Mumbai</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-copy">
+        <div>© 2026 FoodBridge Global Aid Network. All Rights Reserved.</div>
+        <div>Justice begins where inequality ends.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal: Interactive Flutter App Simulator -->
+  <div class="sim-drawer-modal" id="appSimulatorModal">
+    <div class="sim-drawer-dialog">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-light);">
+        <div>
+          <span class="section-label-amber">LIVE FLUTTER SIMULATOR</span>
+          <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-top: 4px;">FoodBridge Mobile Application</h3>
+        </div>
+        <button onclick="closeAppSimulatorModal()" style="font-size: 1.6rem; color: var(--text-dark); cursor: pointer; padding: 4px 10px;">✕</button>
+      </div>
+
+      <div class="sim-dialog-grid">
+        <!-- Left Role Controls -->
+        <div>
+          <p style="font-size: 0.95rem; color: var(--text-body); margin-bottom: 18px;">
+            Select a role to test the mobile app interface built with Flutter & Riverpod:
+          </p>
+
+          <div style="display: flex; gap: 8px; margin-bottom: 24px;">
+            <button id="simRoleDonor" class="btn-pill-dark" style="flex: 1; padding: 10px;" onclick="setModalSimRole('donor')">💙 Donor</button>
+            <button id="simRoleNgo" class="btn-pill-teal" style="flex: 1; padding: 10px;" onclick="setModalSimRole('ngo')">💚 NGO</button>
+            <button id="simRoleRider" class="btn-pill-amber" style="flex: 1; padding: 10px;" onclick="setModalSimRole('rider')">💛 Rider</button>
+          </div>
+
+          <div id="simRoleDetailsBox" style="background: var(--bg-subtle); padding: 20px; border-radius: var(--radius-md); font-size: 0.9rem; line-height: 1.6;">
+            <!-- Dynamic info injected by js -->
+          </div>
+
+          <div style="margin-top: 24px;">
+            <button class="btn-pill-dark" style="width: 100%;" onclick="simulateActiveAction()">
+              ⚡ Trigger State Transition
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Simulated Mobile Screen -->
+        <div style="background: #0F172A; color: #FFF; border-radius: 36px; padding: 24px 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.25); border: 8px solid #1E293B; min-height: 480px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #94A3B8; margin-bottom: 14px;">
+            <span>9:41</span>
+            <span id="simActiveRoleTag" style="color: #60A5FA; font-weight: 700;">● Donor Mode</span>
+            <span>5G 🔋</span>
+          </div>
+
+          <div id="modalPhoneScreenContent">
+            <!-- Injected by js -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Pledge Donation (Direct Supabase Cloud Insertion) -->
+  <div class="sim-drawer-modal" id="pledgeModal">
+    <div class="sim-drawer-dialog" style="max-width: 560px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div>
+          <span class="section-label-amber">DIRECT RESCUE DISPATCH</span>
+          <h3 style="font-family: var(--font-serif); font-size: 1.6rem; margin-top: 4px;">Pledge Surplus Donation</h3>
+        </div>
+        <button onclick="closePledgeModal()" style="font-size: 1.4rem;">✕</button>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-body); margin-bottom: 20px;">
+        Pledging here writes directly into our live <b>Supabase Cloud Database</b>. Volunteer riders and partner NGOs on the <b>FoodBridge Mobile App</b> will receive the alert in real time!
+      </p>
+
+      <form onsubmit="handlePledgeSubmit(event)" id="pledgeForm">
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 6px;">Food Item Description</label>
+          <input type="text" id="pledgeFoodName" style="width: 100%; padding: 12px; border: 1px solid var(--border-light); border-radius: 8px; font-family: inherit;" placeholder="e.g. Fresh Paneer Biryani & Curry" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 6px;">Quantity</label>
+            <input type="text" id="pledgeQuantity" style="width: 100%; padding: 12px; border: 1px solid var(--border-light); border-radius: 8px; font-family: inherit;" placeholder="e.g. 15" value="15" required>
+          </div>
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 6px;">Unit</label>
+            <select id="pledgeUnit" style="width: 100%; padding: 12px; border: 1px solid var(--border-light); border-radius: 8px; font-family: inherit;">
+              <option value="kg">Kilograms (kg)</option>
+              <option value="packets">Meal Packets</option>
+              <option value="boxes">Boxes</option>
+              <option value="servings">Servings</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 6px;">Category</label>
+            <select id="pledgeCategory" style="width: 100%; padding: 12px; border: 1px solid var(--border-light); border-radius: 8px; font-family: inherit;">
+              <option value="Cooked Meals">Cooked Meals</option>
+              <option value="Raw Ingredients">Raw Ingredients</option>
+              <option value="Baked Goods">Baked Goods</option>
+              <option value="Packaged Food">Packaged Food</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 6px;">Est. Servings</label>
+            <input type="number" id="pledgeServings" style="width: 100%; padding: 12px; border: 1px solid var(--border-light); border-radius: 8px; font-family: inherit;" value="35" min="1" required>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 0.85rem; font-weight: 700; display: block; margin-bottom: 6px;">Target Shelter / Destination</label>
+          <select id="pledgeTarget" style="width: 100%; padding: 12px; border: 1px solid var(--border-light); border-radius: 8px; font-family: inherit;">
+            <option value="Helping Hands Foundation">Helping Hands Foundation (Emergency Distribution)</option>
+            <option value="City Orphanage">City Orphanage (Children's Home)</option>
+            <option value="Community Kitchen East">Community Kitchen East (Daily Feeding)</option>
+            <option value="">Public Broadcast (Open to Nearest Available NGO)</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 22px; display: flex; align-items: center; gap: 10px;">
+          <input type="checkbox" id="pledgeUrgent" checked style="width: 18px; height: 18px; accent-color: var(--color-accent-amber);">
+          <label for="pledgeUrgent" style="font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+            ⚡ Urgent: Fresh hot meal (Priority courier dispatch required within 4 hours)
+          </label>
+        </div>
+
+        <button type="submit" id="pledgeSubmitBtn" class="btn-pill-amber" style="width: 100%; padding: 14px; font-weight: 800;">
+          CONFIRM & DISPATCH RESCUE TO MOBILE APP
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="fb-toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
